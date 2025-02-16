@@ -1,3 +1,4 @@
+import { Head } from "next/document";
 import "./styles.css";
 
 export const metadata = {
@@ -12,6 +13,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Head>
+        <link rel="icon" href="/assets/icon.ico" />
+        <meta property="og:type" content="website" />
+        ...
+      </Head>
       <body>{children}</body>
     </html>
   )

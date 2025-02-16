@@ -9,6 +9,8 @@ export const metadata = {
 
   openGraph: {
     title: "三目並べ",
+    url: "https://narumitouzai.github.io/ReactTutorial/",
+    siteName: "Reactチュートリアル",
     description:
       "Reactチュートリアルの三目並べ",
     images: [{

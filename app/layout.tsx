@@ -1,6 +1,7 @@
 import "./styles.css";
 
 export const metadata = {
+  metadataBase: new URL("https://narumitouzai.github.io/ReactTutorial/"),
   title: "三目並べ",
   description:
   "Reactチュートリアルの三目並べ",

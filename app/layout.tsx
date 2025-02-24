@@ -20,7 +20,7 @@ export const metadata = {
     }],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     images: ["/assets/ogp.png"]
   },
 };

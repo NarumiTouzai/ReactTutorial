@@ -7,6 +7,7 @@ export default function Game(){
   const [currentMove, setCurrentMove] = useState(0);
   const xIsNext = currentMove % 2 === 0; 
   const currentSquares = history[currentMove];
+  const [isAsending, setIsAsending] = useState(true)
 
   function handlePlay(nextSquares){
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
@@ -47,7 +48,11 @@ export default function Game(){
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay}/>
       </div>
       <div className='game-info'>
-        <ol>{moves}</ol>
+        Now sort by:
+        <button onClick={() => setIsAsending(!isAsending)}>
+          {isAsending ? "Asending" : "Descending"} 
+        </button>
+        <ol>{isAsending ? moves : moves.reverse()}</ol>
       </div>
     </div>
   )

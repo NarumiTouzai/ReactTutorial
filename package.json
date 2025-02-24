@@ -10,7 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "next": "^15.1.6"
+    "next": "^15.1.7"
   },
   "devDependencies": {
     "@types/node": "22.13.1",

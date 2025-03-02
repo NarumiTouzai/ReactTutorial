@@ -1,6 +1,12 @@
 'use client'
 import { useState } from 'react';
 
+type Props = {
+  className: string,
+  value: string,
+  onSquareClick: any,
+}
+
 export default function Game(){
 
   const [history, setHistory] = useState([Array(9).fill(null)]);
@@ -60,13 +66,19 @@ export default function Game(){
 }
 
 function Board({ xIsNext, squares, onPlay}) {
-  const winner = calculateWinner(squares);
+  const win = calculateWinner(squares);
   let status;
-  if(winner){
-    status = "Winner: " + winner;
-  } else{
+  let line: number[] = [];
+  if(win){
+    status = "Winner: " + win.player;
+    line = win.line;
+  } else if (squares.includes(null)){
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
+  else{
+    status = "Draw";
+  }
+
 
   function handleClick(i){
     const nextSquares = squares.slice();
@@ -87,7 +99,10 @@ function Board({ xIsNext, squares, onPlay}) {
   const board = [...Array(3)].map((_, row) =>{
     let threeSquares = [...Array(3)].map((_, col) =>{
       let n = 3 * row + col;
-      return <Square key={n} value={squares[n]} onSquareClick={() => handleClick(n)}/>
+      return <Square key={n}
+                     className={"square " + (line.includes(n) ? "win" : null)}
+                     value={squares[n]}
+                     onSquareClick={() => handleClick(n)}/>
     });
     return <div key={row} className='board-row'>{threeSquares}</div>;
   })
@@ -100,10 +115,10 @@ function Board({ xIsNext, squares, onPlay}) {
   )
 }
 
-function Square({value, onSquareClick}){
-  return(
+function Square({className, value, onSquareClick}: Props){
+  return( 
     <button 
-      className="square"
+      className={className}
       onClick={onSquareClick}
     >
       {value}
@@ -126,7 +141,7 @@ function calculateWinner(squares){
   for( let i = 0; i < lines.length; i++){
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      return { player: squares[a], line: [a, b, c] };
     }
   }
   return null;
